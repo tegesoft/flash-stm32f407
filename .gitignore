@@ -1,17 +1,37 @@
+Thumbs.db
+
+# Text editors temporary files
+*~
+.~*
+~*
+*.swp
+
+# IDE temporary files
+*.ncb
+*.pdb
+*.suo
+*.obj
+*.lnk
+*.user*
+*.ilk
+
 # Object files
 *.o
 
-# Libraries
-*.lib
+# Binary files
+*.exe
+*.out
+*.app
+*.dll
+*.idl
+*.tlb
 *.a
-
-# Shared objects (inc. Windows DLLs)
+*.o
 *.dll
 *.so
 *.so.*
 *.dylib
 
-# Executables
-*.exe
-*.out
-*.app
+# Auto-generated files
+Makefile*
+
