@@ -74,20 +74,12 @@ int flashIHexFile(FIL* file)
     return BOOTLOADER_ERROR_BADHEX;
 }
 
-void flashJumpApplication(uint32_t address) {
-    typedef void (*pFunction)(void);
+void flashJumpApplication(uint32_t address)
+{
+    typedef void (*funcPtr)(void);
 
-    pFunction Jump_To_Application;
-
-    /* Variable that will be loaded with the start address of the application */
-    vu32* JumpAddress;
-    const vu32* ApplicationAddress = (vu32*)address;
-
-    /* Get jump address from application vector table */
-    JumpAddress = (vu32*)ApplicationAddress[1];
-
-    /* Load this address into function pointer */
-    Jump_To_Application = (pFunction)JumpAddress;
+    u32 jumpAddr = *(vu32*)(address + 0x04); /* reset ptr in vector table */
+    funcPtr usrMain = (funcPtr)jumpAddr;
 
     /* Reset all interrupts to default */
     chSysDisable();
@@ -101,6 +93,6 @@ void flashJumpApplication(uint32_t address) {
         NVIC->ICER[i] = NVIC->IABR[i];
 
     /* Set stack pointer as in application's vector table */
-    __set_MSP((u32) (ApplicationAddress[0]));
-    Jump_To_Application();
+    __set_MSP(*(vu32*)address);
+    usrMain();
 }
