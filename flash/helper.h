@@ -5,21 +5,13 @@
 #include <ff.h>
 #include <stdint.h>
 
-#define BOOTLOADER_SUCCESS          0
-#define BOOTLOADER_ERROR_NOCARD     1
-#define BOOTLOADER_ERROR_BADFS      2
-#define BOOTLOADER_ERROR_NOFILE     3
-#define BOOTLOADER_ERROR_BADHEX     4
-#define BOOTLOADER_ERROR_BADFLASH   5
-
-/**
- * @brief Flash the provided IHex @p file.
- * @param file IHex file describing the data to be flashed.
- * @return BOOTLOADER_SUCCESS on success
- * @return BOOTLOADER_ERROR_BADFLASH if an error occured when manipulating the flash memory
- * @return BOOTLOADER_ERROR_BADHEX if an error occured when reading the iHex file
- */
-int flashIHexFile(FIL* file);
+#define BOOTLOADER_SUCCESS           0
+#define BOOTLOADER_ERROR_NOCARD      1
+#define BOOTLOADER_ERROR_BADFS       2
+#define BOOTLOADER_ERROR_NOFILE      3
+#define BOOTLOADER_ERROR_READFAILURE 4
+#define BOOTLOADER_ERROR_BADHEX      5
+#define BOOTLOADER_ERROR_BADFLASH    6
 
 /**
  * @brief Jump to application located in flash.
