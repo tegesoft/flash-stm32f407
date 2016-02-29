@@ -122,7 +122,11 @@ int flashErase(flashaddr_t address, size_t size)
         if (err != FLASH_RETURN_SUCCESS)
             return err;
         address = flashSectorEnd(sector);
-        size -= flashSectorSize(sector);
+        size_t sector_size = flashSectorSize(sector);
+        if (sector_size >= size)
+            break;
+        else
+            size -= sector_size;
     }
 
     return FLASH_RETURN_SUCCESS;
